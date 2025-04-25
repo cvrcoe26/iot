@@ -1,0 +1,269 @@
+[
+    {
+        "id": "815feb2adf91b566",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "07558e2ee252c132",
+        "type": "http request",
+        "z": "815feb2adf91b566",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=hyderabad&appid=77003d306b25e391aca3f6d95268b3ed&units=metric",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "bcaacb54f07b8f9e"
+            ]
+        ]
+    },
+    {
+        "id": "bcaacb54f07b8f9e",
+        "type": "function",
+        "z": "815feb2adf91b566",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload.main.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 200,
+        "wires": [
+            [
+                "c84a70cbc0a1f3eb"
+            ]
+        ]
+    },
+    {
+        "id": "c84a70cbc0a1f3eb",
+        "type": "ui_text",
+        "z": "815feb2adf91b566",
+        "group": "dashboard_group",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 810,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c6a38403417f8154",
+        "type": "inject",
+        "z": "815feb2adf91b566",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 200,
+        "wires": [
+            [
+                "07558e2ee252c132"
+            ]
+        ]
+    },
+    {
+        "id": "025be407da6194fb",
+        "type": "inject",
+        "z": "815feb2adf91b566",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 260,
+        "wires": [
+            [
+                "f801d178b48b9892"
+            ]
+        ]
+    },
+    {
+        "id": "f801d178b48b9892",
+        "type": "function",
+        "z": "815feb2adf91b566",
+        "name": "function 2",
+        "func": "msg.payload = Math.random()*100;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "bdbbef96de433ee9",
+                "7c6bc900f7bf6298"
+            ]
+        ]
+    },
+    {
+        "id": "bdbbef96de433ee9",
+        "type": "ui_chart",
+        "z": "815feb2adf91b566",
+        "name": "",
+        "group": "dashboard_group",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 600,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c6bc900f7bf6298",
+        "type": "ui_gauge",
+        "z": "815feb2adf91b566",
+        "name": "",
+        "group": "dashboard_group",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 550,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "28fbf18b681727f1",
+        "type": "ui_slider",
+        "z": "815feb2adf91b566",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "dashboard_group",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "50",
+        "step": 1,
+        "className": "",
+        "x": 750,
+        "y": 280,
+        "wires": [
+            [
+                "c84a70cbc0a1f3eb"
+            ]
+        ]
+    },
+    {
+        "id": "dashboard_group",
+        "type": "ui_group",
+        "name": "Weather Info",
+        "tab": "dashboard_tab",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "dashboard_tab",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "order": 1
+    }
+]
